@@ -114,7 +114,7 @@ router.post('/generate-playlist', verifyToken, async (req, res) => {
             `https://api.spotify.com/v1/users/${user.spotifyId}/playlists`,
             {
                 name: playlistName,
-                description: `Generated from prompt: ${prompt}`,
+                description: `Generated Playlist from RECTIFY`,
                 public: false
             },
             { headers: { Authorization: `Bearer ${accessToken}` } }
