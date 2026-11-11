@@ -1,0 +1,86 @@
+@import "tailwindcss";
+
+@theme inline {
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --color-ink: #0b0d0c;
+  --color-panel: #141816;
+  --color-line: #262c29;
+  --color-accent: #34d399;
+}
+
+html {
+  color-scheme: dark;
+}
+
+body {
+  background: var(--color-ink);
+  color: #e7ebe9;
+  font-family: var(--font-sans), system-ui, sans-serif;
+}
+
+/* ---------- Decorative backdrop (see components/Backdrop.tsx) ---------- */
+
+.backdrop-glow {
+  position: absolute;
+  border-radius: 9999px;
+  animation: backdrop-drift 26s ease-in-out infinite alternate;
+}
+
+.backdrop-glow-a {
+  top: -18vmax;
+  left: -14vmax;
+  width: 62vmax;
+  height: 62vmax;
+  background: radial-gradient(closest-side, rgb(52 211 153 / 0.2), transparent);
+}
+
+.backdrop-glow-b {
+  right: -20vmax;
+  bottom: -22vmax;
+  width: 68vmax;
+  height: 68vmax;
+  background: radial-gradient(closest-side, rgb(45 160 190 / 0.16), transparent);
+  animation-duration: 34s;
+  animation-direction: alternate-reverse;
+}
+
+.backdrop-note {
+  opacity: 0.13;
+  transform: rotate(var(--tilt, 0deg));
+  animation: backdrop-float 10s ease-in-out infinite;
+}
+
+@keyframes backdrop-drift {
+  from {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  to {
+    transform: translate3d(7vmax, 5vmax, 0) scale(1.15);
+  }
+}
+
+@keyframes backdrop-float {
+  0%,
+  100% {
+    transform: translateY(0) rotate(var(--tilt, 0deg));
+  }
+  50% {
+    transform: translateY(-16px) rotate(calc(var(--tilt, 0deg) + 6deg));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .backdrop-glow,
+  .backdrop-note {
+    animation: none;
+  }
+}
+
+/* ---------- Scrolling song list ---------- */
+
+.track-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-line) transparent;
+  overscroll-behavior: contain;
+}
